@@ -20,12 +20,12 @@ const { primaryColors, surfaces, primary, surface, isDarkMode, updateColors } =
       aria-label="Settings"
     />
     <div
-      class="dark:bg-surface-900 border-surface-200 dark:border-surface-700 absolute right-0 top-16 z-50 hidden w-64 origin-top rounded-md border bg-white p-4 shadow-lg"
+      class="absolute right-0 top-16 z-50 hidden w-64 origin-top rounded-md border border-surface-200 bg-white p-4 shadow-lg dark:border-surface-700 dark:bg-surface-900"
     >
       <div class="flex flex-col gap-4">
         <div>
           <span
-            class="text-surface-600 dark:text-surface-400 text-sm font-semibold"
+            class="text-sm font-semibold text-surface-600 dark:text-surface-400"
           >
             Primary
           </span>
@@ -37,7 +37,7 @@ const { primaryColors, surfaces, primary, surface, isDarkMode, updateColors } =
               :title="pc.name"
               :class="[
                 'h-5 w-5 cursor-pointer rounded-full border-none p-0 focus:outline-none focus:ring-2 focus:ring-offset-2',
-                { 'ring-primary ring-2 ring-offset-2': primary === pc.name },
+                { 'ring-2 ring-primary ring-offset-2': primary === pc.name },
               ]"
               :style="{ backgroundColor: pc.palette['500'] }"
               @click="updateColors('primary', pc.name)"
@@ -46,7 +46,7 @@ const { primaryColors, surfaces, primary, surface, isDarkMode, updateColors } =
         </div>
         <div>
           <span
-            class="text-surface-600 dark:text-surface-400 text-sm font-semibold"
+            class="text-sm font-semibold text-surface-600 dark:text-surface-400"
             >Surface</span
           >
           <div class="flex flex-wrap justify-between gap-2 pt-2">
@@ -58,7 +58,7 @@ const { primaryColors, surfaces, primary, surface, isDarkMode, updateColors } =
               :class="[
                 'h-5 w-5 cursor-pointer rounded-full border-none p-0 focus:outline-none focus:ring-2 focus:ring-offset-2',
                 {
-                  'ring-primary ring-2 ring-offset-2': surface
+                  'ring-2 ring-primary ring-offset-2': surface
                     ? surface === s.name
                     : isDarkMode
                       ? s.name === 'zinc'

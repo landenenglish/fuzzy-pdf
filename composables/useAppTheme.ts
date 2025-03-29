@@ -418,9 +418,9 @@ export interface AppThemeState {
 }
 
 const appThemeState = useLocalStorage<AppThemeState>('appThemeState', {
-  primary: 'emerald',
-  darkMode: false,
-  surface: undefined,
+  primary: 'sky',
+  darkMode: true,
+  surface: 'ocean',
 })
 
 export const applyAppTheme = (state: AppThemeState) => {
