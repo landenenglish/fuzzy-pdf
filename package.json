@@ -1,0 +1,35 @@
+{
+  "name": "fuzzy-pdf",
+  "type": "module",
+  "author": "Landen English",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "local": "nuxt dev",
+    "start": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@primeuix/themes": "^1.0.0",
+    "@primevue/forms": "^4.3.3",
+    "chart.js": "^4.4.8",
+    "dotenv": "^16.4.7",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.3.3",
+    "tailwindcss-primeui": "^0.6.1",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "6.13.2",
+    "@primevue/nuxt-module": "^4.3.3",
+    "@vueuse/nuxt": "^13.0.0",
+    "nuxt": "^3.16.1",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "vue-router": "^4.5.0"
+  }
+}
