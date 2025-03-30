@@ -48,6 +48,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      title: 'Fuzzy PDF',
       // This script must load before any rendering happens
       script: [
         {
@@ -67,6 +68,13 @@ export default defineNuxtConfig({
             }
           `,
           tagPosition: 'bodyOpen',
+        },
+      ],
+      link: [
+        {
+          rel: 'icon',
+          href: '/favicon.svg',
+          type: 'image/svg+xml',
         },
       ],
     },
