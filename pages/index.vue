@@ -66,9 +66,9 @@ const visiblePages = computed(() =>
   <div class="flex flex-col items-center">
     <header class="mb-4 flex flex-col items-center justify-center">
       <h1 class="mb-4 text-4xl font-bold tracking-tight text-primary-500">
-        Fuzzy PDF Search
+        PDF Fuzzy Search
       </h1>
-      <p class="text-sm italic text-gray-500">When Ctrl+F doesn't cut it</p>
+      <p class="text-sm italic text-gray-500">When Ctrl+F isn't enough</p>
     </header>
 
     <MainFileUpload v-model="file" class="mb-8" />
