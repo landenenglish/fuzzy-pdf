@@ -71,8 +71,8 @@ export const usePDFjs = (options: UsePDFjsOptions) => {
           const textContent = await pdfPage.getTextContent()
 
           const text = textContent.items
-            .filter((item: any) => 'str' in item)
-            .map((item: any) => item.str)
+            .filter((item) => 'str' in item)
+            .map((item) => item.str)
             .join(' ')
 
           processedPages.value.push({ page: pageNumber, text })

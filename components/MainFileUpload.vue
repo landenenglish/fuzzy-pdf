@@ -46,14 +46,12 @@ const getFileNameWithoutExtension = (fileName: string) =>
 
     <div
       v-else
-      class="uploaded-file-card flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-primary/30 bg-surface-50 p-4 dark:bg-surface-950"
+      class="uploaded-file-card flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary/30 bg-surface-50 p-4 dark:bg-surface-950"
     >
-      <h2 class="text-lg">
-        <span class="font-bold">{{
+      <h2 class="flex items-center gap-2 text-lg">
+        <span class="break-words">{{
           getFileNameWithoutExtension(file.name)
         }}</span>
-      </h2>
-      <div class="flex gap-2">
         <Button
           icon="pi pi-trash"
           rounded
@@ -61,8 +59,9 @@ const getFileNameWithoutExtension = (fileName: string) =>
           size="small"
           @click="file = undefined"
           aria-label="Change file"
+          class="ml-2 shrink-0"
         />
-      </div>
+      </h2>
     </div>
   </div>
 </template>

@@ -36,14 +36,13 @@ useWindowScroll({
 })
 
 watchEffect(() => {
-  if (search.value || file.value) {
-    visiblePagesCount.value = visiblePagesIncrement
+  if (!search.value && !file.value) return
 
+  visiblePagesCount.value = visiblePagesIncrement
+
+  if (search.value) {
     const scrollToElement = document.querySelector('.scroll-to-element')
-
-    if (scrollToElement) {
-      scrollToElement.scrollIntoView({ behavior: 'smooth' })
-    }
+    scrollToElement?.scrollIntoView({ behavior: 'smooth' })
   }
 })
 
@@ -72,8 +71,8 @@ const visiblePages = computed(() =>
 
 <template>
   <div class="flex flex-col items-center">
-    <header class="mb-4 flex flex-col items-center justify-center">
-      <h1 class="mb-4 text-4xl font-bold tracking-tight text-primary-500">
+    <header class="mb-6 flex flex-col items-center justify-center">
+      <h1 class="mb-1 text-4xl font-bold tracking-tight text-primary-500">
         PDF Fuzzy Search
       </h1>
       <h2 class="text-sm italic text-gray-500">When Ctrl+F isn't enough</h2>
@@ -105,9 +104,3 @@ const visiblePages = computed(() =>
     </template>
   </div>
 </template>
-
-<style>
-.p-progressbar-label {
-  display: none !important;
-}
-</style>

@@ -53,13 +53,6 @@ export function useFuse<T = string>({
     { debounce }
   )
 
-  const dedupedSearchResults = computed(() =>
-    searchResults.value.filter(
-      (item, index, self) =>
-        index === self.findIndex((t) => t.item === item.item)
-    )
-  )
-
   const closestMatch = computed(() => searchResults.value[0] ?? null)
 
   return {

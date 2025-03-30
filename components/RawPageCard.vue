@@ -42,7 +42,7 @@ const { templateRef: textContainer } = useScrollToHighestDensity({
   >
     <template #title>
       <div class="flex items-center justify-between">
-        <Badge :value="page" />
+        <span class="text-sm text-primary">Page {{ page }}</span>
         <a
           :href="pdfUrl + '#page=' + page"
           target="_blank"

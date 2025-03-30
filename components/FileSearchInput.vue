@@ -1,19 +1,9 @@
 <script setup lang="ts">
-const model = defineModel<string>({
-  required: true,
-})
+const model = defineModel<string>({ required: true })
 
 const input = ref(model.value)
 
-watchDebounced(
-  input,
-  (value) => {
-    model.value = value
-  },
-  {
-    debounce: 300,
-  }
-)
+watchDebounced(input, (value) => (model.value = value), { debounce: 300 })
 </script>
 
 <template>
