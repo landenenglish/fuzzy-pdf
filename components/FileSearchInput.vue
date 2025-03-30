@@ -11,7 +11,7 @@ watchDebounced(
     model.value = value
   },
   {
-    debounce: 200,
+    debounce: 300,
   }
 )
 </script>
@@ -20,7 +20,7 @@ watchDebounced(
   <Textarea
     v-model="input"
     placeholder="Search"
-    class="w-full max-w-2xl resize-none"
+    class="file-search-input w-full max-w-2xl resize-none"
     rows="2"
   />
 </template>

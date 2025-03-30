@@ -4,7 +4,7 @@
       <a
         :href="'https://github.com/landenenglish/fuzzy-pdf'"
         target="_blank"
-        class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+        class="ml-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
       >
         <i class="pi pi-github text-xl"></i>
       </a>

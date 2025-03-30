@@ -46,7 +46,7 @@ const getFileNameWithoutExtension = (fileName: string) =>
 
     <div
       v-else
-      class="flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-primary/30 bg-surface-50 p-4 dark:bg-surface-950"
+      class="uploaded-file-card flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-primary/30 bg-surface-50 p-4 dark:bg-surface-950"
     >
       <h2 class="text-lg">
         <span class="font-bold">{{

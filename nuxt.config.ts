@@ -44,7 +44,7 @@ export default defineNuxtConfig({
     autoImport: true,
   },
 
-  css: ['primeicons/primeicons.css'],
+  css: ['primeicons/primeicons.css', 'assets/css/main.css'],
 
   app: {
     head: {

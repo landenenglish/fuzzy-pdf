@@ -22,9 +22,11 @@ const { searchResults } = useFuse({
   },
 })
 
-const visiblePagesIncrement = 25
+const visiblePagesIncrement = 15
 const visiblePagesCount = ref<number>(visiblePagesIncrement)
 
+// Rendering the page cards is the largest performance bottleneck
+// This is a simple solution to load more pages when the user scrolls to the bottom
 useWindowScroll({
   onAlmostAtBottom: () => {
     nextTick(() => {
@@ -36,6 +38,12 @@ useWindowScroll({
 watchEffect(() => {
   if (search.value || file.value) {
     visiblePagesCount.value = visiblePagesIncrement
+
+    const scrollToElement = document.querySelector('.scroll-to-element')
+
+    if (scrollToElement) {
+      scrollToElement.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 })
 
@@ -68,10 +76,12 @@ const visiblePages = computed(() =>
       <h1 class="mb-4 text-4xl font-bold tracking-tight text-primary-500">
         PDF Fuzzy Search
       </h1>
-      <p class="text-sm italic text-gray-500">When Ctrl+F isn't enough</p>
+      <h2 class="text-sm italic text-gray-500">When Ctrl+F isn't enough</h2>
     </header>
 
-    <MainFileUpload v-model="file" class="mb-8" />
+    <MainFileUpload v-model="file" />
+
+    <div class="scroll-to-element mb-8"></div>
 
     <FileSearchInput v-if="file" v-model="search" class="mb-8" />
 

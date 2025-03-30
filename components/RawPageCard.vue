@@ -15,7 +15,6 @@ const { page, text, pdfUrl, search } = defineProps<{
 
 const expanded = ref(false)
 const maxHeight = '120px'
-const textContainer = useTemplateRef<HTMLDivElement>('textContainer')
 
 const toggleHeight = () => {
   expanded.value = !expanded.value
@@ -25,74 +24,15 @@ const copyText = (text: string) => {
   navigator.clipboard.writeText(text)
 }
 
-const highlightText = (text: string, searchInput?: string) => {
-  if (!searchInput || searchInput.trim() === '') return text
-
-  const searchWords = searchInput.trim().split(/\s+/)
-
-  const regex = new RegExp(`\\b(${searchWords.join('|')})\\b`, 'gi')
-
-  return text.replace(
-    regex,
-    '<span class="bg-yellow-200 dark:bg-yellow-800 highlight-match">$1</span>'
-  )
-}
-
-const scrollToHighlightDensity = () => {
-  if (!textContainer.value || !search || search.trim() === '') return
-
-  setTimeout(() => {
-    const container = textContainer.value
-    if (!container) return
-
-    const highlights = container.querySelectorAll('.highlight-match')
-    if (highlights.length === 0) return
-
-    const viewportHeight = container.clientHeight
-    const scrollRange = container.scrollHeight - viewportHeight
-
-    if (scrollRange <= 0) return
-
-    const numWindows = Math.ceil(container.scrollHeight / viewportHeight)
-    const densityMap = new Array(numWindows).fill(0)
-
-    highlights.forEach((highlight) => {
-      const highlightTop = (highlight as HTMLElement).offsetTop
-      const windowIndex = Math.floor(highlightTop / viewportHeight)
-      if (windowIndex >= 0 && windowIndex < densityMap.length) {
-        densityMap[windowIndex]++
-      }
-    })
-
-    let maxDensity = 0
-    let maxDensityIndex = 0
-
-    densityMap.forEach((density, index) => {
-      if (density > maxDensity) {
-        maxDensity = density
-        maxDensityIndex = index
-      }
-    })
-
-    container.scrollTop = maxDensityIndex * viewportHeight
-  }, 100)
-}
-
-watch(
-  () => search,
-  () => {
-    if (textContainer.value) {
-      textContainer.value.scrollTop = 0
-      scrollToHighlightDensity()
-    }
-  },
-  { immediate: true }
+const highlightedText = highlightText(
+  () => text,
+  () => search ?? ''
 )
 
-onMounted(() => {
-  if (search && search.trim()) {
-    scrollToHighlightDensity()
-  }
+const { templateRef: textContainer } = useScrollToHighestDensity({
+  templateRefName: 'textContainer',
+  selector: '.highlight-match',
+  watchSources: [() => search, () => expanded],
 })
 </script>
 
@@ -119,7 +59,7 @@ onMounted(() => {
           ref="textContainer"
           class="slim-scrollbar overflow-y-auto overflow-x-hidden whitespace-pre-line leading-relaxed text-gray-700 transition-all duration-300 dark:text-gray-300"
           :style="{ maxHeight: expanded ? '500px' : maxHeight }"
-          v-html="highlightText(text, search)"
+          v-html="highlightedText"
         />
       </div>
     </template>
@@ -155,23 +95,3 @@ onMounted(() => {
     </template>
   </Card>
 </template>
-
-<style>
-/* TODO: Put in a global utils place */
-.slim-scrollbar::-webkit-scrollbar {
-  width: 4px;
-}
-
-.slim-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(155, 155, 155, 0.5);
-  border-radius: 4px;
-}
-
-.slim-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.p-card-body {
-  padding: 0 !important;
-}
-</style>
