@@ -40,7 +40,7 @@ const getFileNameWithoutExtension = (fileName: string) =>
       </template>
 
       <template #empty>
-        <span class="hidden sm:inline">Drag and drop a file to to upload</span>
+        <span class="hidden sm:inline">Drag and drop a file to upload</span>
       </template>
     </FileUpload>
 
