@@ -23,19 +23,19 @@ const { searchResults } = useFuse({
 })
 
 const visiblePagesIncrement = 25
-const visiblePages = ref<number>(visiblePagesIncrement)
+const visiblePagesCount = ref<number>(visiblePagesIncrement)
 
 useWindowScroll({
   onAlmostAtBottom: () => {
     nextTick(() => {
-      visiblePages.value += visiblePagesIncrement
+      visiblePagesCount.value += visiblePagesIncrement
     })
   },
 })
 
 watchEffect(() => {
   if (search.value || file.value) {
-    visiblePages.value = visiblePagesIncrement
+    visiblePagesCount.value = visiblePagesIncrement
   }
 })
 
@@ -47,15 +47,19 @@ const filteredPages = computed<
     score?: number
   }[]
 >(() => {
-  if (!search.value) return processedPages.value.slice(0, visiblePages.value)
+  if (!search.value) return processedPages.value
 
-  return searchResults.value.slice(0, visiblePages.value).map((result) => {
+  return searchResults.value.map((result) => {
     return {
       ...result.item,
       ...result,
     }
   })
 })
+
+const visiblePages = computed(() =>
+  filteredPages.value.slice(0, visiblePagesCount.value)
+)
 </script>
 
 <template>
@@ -74,11 +78,11 @@ const filteredPages = computed<
     <template v-if="file && totalPages">
       <div class="w-full max-w-2xl">
         <p class="mb-4 text-sm text-gray-500">
-          {{ searchResults.length || totalPages }} of {{ totalPages }} pages
+          {{ filteredPages.length }} of {{ totalPages }} pages
         </p>
 
         <RawPageCard
-          v-for="page in filteredPages"
+          v-for="page in visiblePages"
           :key="page.page"
           :page="page.page"
           :text="page.text"

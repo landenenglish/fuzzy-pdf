@@ -1,7 +1,7 @@
 <template>
   <NuxtRouteAnnouncer />
 
-  <AppTopBar />
+  <AppTopbar />
 
   <NuxtLayout>
     <ClientOnly>

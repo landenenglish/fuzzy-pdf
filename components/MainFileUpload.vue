@@ -40,7 +40,7 @@ const getFileNameWithoutExtension = (fileName: string) =>
       </template>
 
       <template #empty>
-        <span>Drag and drop a file to to upload</span>
+        <span class="hidden sm:inline">Drag and drop a file to to upload</span>
       </template>
     </FileUpload>
 
@@ -73,6 +73,6 @@ const getFileNameWithoutExtension = (fileName: string) =>
 }
 
 .p-fileupload-content {
-  @apply flex min-h-[100px] items-center justify-center;
+  @apply hidden min-h-[100px] items-center justify-center sm:flex;
 }
 </style>
